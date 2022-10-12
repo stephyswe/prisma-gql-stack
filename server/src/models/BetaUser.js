@@ -1,6 +1,6 @@
 async function createUser(user, ctx) {
   if (user.acceptTermsAndConditions) {
-    return await ctx.prisma.user.create({
+    return await ctx.prisma.betaUser.create({
       data: user,
     });
   } else {
@@ -9,7 +9,7 @@ async function createUser(user, ctx) {
 }
 
 async function updateUsername(user, ctx) {
-  return await ctx.prisma.user.update({
+  return await ctx.prisma.betaUser.update({
     where: { id: user.id },
     data: user,
   });

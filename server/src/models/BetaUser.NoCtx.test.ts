@@ -1,6 +1,5 @@
-/* global expect, test */
-const { createUser, updateUsername } = require("./BetaUser");
-const { prismaMock } = require("../singleton");
+import { createUser, updateUsername } from "./functions-without-context";
+import { prismaMock } from "./../singleton";
 
 test("should create new user ", async () => {
   const user = {
@@ -10,7 +9,7 @@ test("should create new user ", async () => {
     acceptTermsAndConditions: true,
   };
 
-  prismaMock.user.create.mockResolvedValue(user);
+  prismaMock.betaUser.create.mockResolvedValue(user);
 
   await expect(createUser(user)).resolves.toEqual({
     id: 1,
@@ -25,14 +24,16 @@ test("should update a users name ", async () => {
     id: 1,
     name: "Rich Haines",
     email: "hello@prisma.io",
+    acceptTermsAndConditions: true,
   };
 
-  prismaMock.user.update.mockResolvedValue(user);
+  prismaMock.betaUser.update.mockResolvedValue(user);
 
   await expect(updateUsername(user)).resolves.toEqual({
     id: 1,
     name: "Rich Haines",
     email: "hello@prisma.io",
+    acceptTermsAndConditions: true,
   });
 });
 
@@ -44,7 +45,7 @@ test("should fail if user does not accept terms", async () => {
     acceptTermsAndConditions: false,
   };
 
-  prismaMock.user.create.mockRejectedValue(
+  prismaMock.betaUser.create.mockRejectedValue(
     new Error("User must accept terms!")
   );
 
