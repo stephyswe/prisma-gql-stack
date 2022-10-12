@@ -28,3 +28,10 @@ model Note {
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
 }
+
+model BetaUser {
+  id                       Int     @id @default(autoincrement())
+  email                    String  @unique
+  name                     String?
+  acceptTermsAndConditions Boolean
+}
