@@ -1,5 +1,3 @@
-// server/src/models/Note.ts
-
 import { builder } from "../builder";
 
 builder.prismaObject("Note", {
